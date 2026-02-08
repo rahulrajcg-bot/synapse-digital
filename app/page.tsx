@@ -353,23 +353,36 @@ export default function Home() {
       <section id="contact" className="py-20 px-4 bg-slate-800/50">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-4xl font-bold text-center text-white mb-12">{t.contact}</h2>
-          {/* Formspree Setup: 1. Go to formspree.io/register 2. Create form 3. Replace YOUR_FORM_ID below */}
-          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" className="space-y-6">
+          {/* Contact Form - Opens Email Client */}
+          <form 
+            onSubmit={(e) => {
+              e.preventDefault()
+              const formData = new FormData(e.currentTarget)
+              const name = formData.get('name')
+              const email = formData.get('email')
+              const message = formData.get('message')
+              const subject = `New Inquiry from ${name} - Synapse Digital`
+              const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`
+              window.location.href = `mailto:rahulraj.cg@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`
+            }}
+            className="space-y-6"
+          >
             <div>
-              <label className="block text-gray-300 mb-2">{t.name}</label>
+              <label className="block text-gray-300 mb-2">{t.name} *</label>
               <input type="text" name="name" required className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-blue-500" />
             </div>
             <div>
-              <label className="block text-gray-300 mb-2">{t.email}</label>
+              <label className="block text-gray-300 mb-2">{t.email} *</label>
               <input type="email" name="email" required className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-blue-500" />
             </div>
             <div>
-              <label className="block text-gray-300 mb-2">{t.message}</label>
+              <label className="block text-gray-300 mb-2">{t.message} *</label>
               <textarea name="message" rows={4} required className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-blue-500"></textarea>
             </div>
             <button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-4 rounded-lg hover:shadow-lg transition">
               {t.send}
             </button>
+            <p className="text-gray-400 text-sm text-center">Clicking send will open your email app</p>
           </form>
         </div>
       </section>
