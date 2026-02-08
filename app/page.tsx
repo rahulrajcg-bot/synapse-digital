@@ -35,37 +35,6 @@ const translations = {
     send: "Send Message",
     footer: "© 2024 Synapse Digital. All rights reserved."
   },
-  hi: {
-    hero: "विचारों को हकीकत में बदलना",
-    subtitle: "आपके व्यवसाय के लिए पेशेवर आईटी समाधान",
-    cta: "शुरू करें",
-    services: "हमारी सेवाएं",
-    webDev: "वेबसाइट विकास",
-    webDevDesc: "आधुनिक, उत्तरदायी वेबसाइट जो आगंतुकों को ग्राहकों में बदल देती हैं",
-    mobileApps: "मोबाइल ऐप्स",
-    mobileAppsDesc: "iOS और Android के लिए नेटिव और क्रॉस-प्लेटफॉर्म ऐप्स",
-    videoEditing: "वीडियो एडिटिंग",
-    videoEditingDesc: "पेशेवर वीडियो निर्माण और पोस्ट-प्रोडक्शन सेवाएं",
-    pptDesign: "PPT डिज़ाइन",
-    pptDesignDesc: "प्रभावशाली प्रस्तुतियां जो प्रभाव डालती हैं",
-    seo: "SEO सेवाएं",
-    seoDesc: "Google पर ऊपर रैंक करें और अधिक ऑर्गेनिक ट्रैफिक प्राप्त करें",
-    itServices: "आईटी सेवाएं",
-    itServicesDesc: "आपकी व्यावसायिक जरूरतों के लिए पूर्ण आईटी समाधान",
-    whyUs: "हमें क्यों चुनें",
-    quality: "प्रीमियम गुणवत्ता",
-    qualityDesc: "हम हर प्रोजेक्ट में उत्कृष्टता देते हैं",
-    support: "24/7 सहायता",
-    supportDesc: "जब भी आपको जरूरत हो, हमेशा यहां",
-    affordable: "सस्ती कीमत",
-    affordableDesc: "आपके निवेश के लिए सर्वोत्तम मूल्य",
-    contact: "संपर्क करें",
-    name: "नाम",
-    email: "ईमेल",
-    message: "संदेश",
-    send: "संदेश भेजें",
-    footer: "© 2024 सिनैप्स डिजिटल। सर्वाधिकार सुरक्षित।"
-  },
   de: {
     hero: "Ideen in Realität umwandeln",
     subtitle: "Professionelle IT-Lösungen für Ihr Unternehmen",
@@ -144,14 +113,13 @@ export default function Home() {
 
   useEffect(() => {
     const userLang = navigator.language.split('-')[0]
-    if (['en', 'hi', 'de', 'es'].includes(userLang)) {
+    if (['en', 'de', 'es'].includes(userLang)) {
       setLang(userLang)
     }
   }, [])
 
   const languages = [
     { code: 'en', name: 'English' },
-    { code: 'hi', name: 'हिंदी' },
     { code: 'de', name: 'Deutsch' },
     { code: 'es', name: 'Español' }
   ]
@@ -293,18 +261,19 @@ export default function Home() {
       <section id="contact" className="py-20 px-4 bg-slate-800/50">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-4xl font-bold text-center text-white mb-12">{t.contact}</h2>
-          <form className="space-y-6">
+          {/* Formspree Setup: 1. Go to formspree.io/register 2. Create form 3. Replace YOUR_FORM_ID below */}
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" className="space-y-6">
             <div>
               <label className="block text-gray-300 mb-2">{t.name}</label>
-              <input type="text" className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-blue-500" />
+              <input type="text" name="name" required className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-blue-500" />
             </div>
             <div>
               <label className="block text-gray-300 mb-2">{t.email}</label>
-              <input type="email" className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-blue-500" />
+              <input type="email" name="email" required className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-blue-500" />
             </div>
             <div>
               <label className="block text-gray-300 mb-2">{t.message}</label>
-              <textarea rows={4} className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-blue-500"></textarea>
+              <textarea name="message" rows={4} required className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-blue-500"></textarea>
             </div>
             <button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-4 rounded-lg hover:shadow-lg transition">
               {t.send}
