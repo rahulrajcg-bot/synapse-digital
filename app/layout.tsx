@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
+import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ 
@@ -14,20 +14,14 @@ const playfair = Playfair_Display({
   display: 'swap',
 })
 
-const jetbrains = JetBrains_Mono({ 
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-})
-
 export const metadata: Metadata = {
-  title: 'Synapse Digital | Premium IT Solutions & Digital Transformation',
-  description: 'Transform your business with cutting-edge web development, mobile apps, video production, and digital marketing solutions. Premium quality, delivered.',
-  keywords: ['IT Solutions', 'Web Development', 'Mobile Apps', 'Video Editing', 'SEO', 'Digital Marketing', 'India'],
+  title: 'Synapse Digital | Professional IT Solutions',
+  description: 'Premium IT solutions and digital transformation services for enterprises. Web development, mobile apps, and strategic consulting.',
+  keywords: ['IT Solutions', 'Enterprise', 'Web Development', 'Digital Transformation', 'India'],
   authors: [{ name: 'Synapse Digital' }],
   openGraph: {
-    title: 'Synapse Digital | Premium IT Solutions',
-    description: 'Transform your business with cutting-edge digital solutions',
+    title: 'Synapse Digital | Professional IT Solutions',
+    description: 'Premium IT solutions for enterprises',
     type: 'website',
   },
 }
@@ -38,8 +32,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} ${jetbrains.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <body className="font-sans antialiased bg-cream-50">{children}</body>
     </html>
   )
 }

@@ -8,60 +8,62 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Custom dark theme colors
-        dark: {
-          900: '#0a0a0f',
-          800: '#12121a',
-          700: '#1a1a2e',
-          600: '#252542',
-          500: '#32325a',
+        // Corporate color palette - Navy Blue + Gold
+        navy: {
+          900: '#0a1628',
+          800: '#0f1d33',
+          700: '#152540',
+          600: '#1c2f4d',
+          500: '#243a5a',
+          400: '#3d5a80',
+          300: '#5a7fa8',
+          200: '#98b3d1',
+          100: '#c8d8e8',
+          50: '#e8eff7',
         },
-        // Accent colors
-        accent: {
-          cyan: '#00f5ff',
-          violet: '#8b5cf6',
-          magenta: '#ff00ff',
-          amber: '#f59e0b',
-          emerald: '#10b981',
-          rose: '#f43f5e',
+        gold: {
+          500: '#c9a227',
+          400: '#d4b43a',
+          300: '#e0c44d',
+          200: '#ebd460',
+          100: '#f5e473',
+          600: '#b08d1f',
+          700: '#967516',
         },
-        // Gradient stops
-        gradient: {
-          start: '#00f5ff',
-          mid: '#8b5cf6',
-          end: '#ff00ff',
+        cream: {
+          50: '#faf9f6',
+          100: '#f5f3ef',
+          200: '#ebe8e2',
         }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Playfair Display', 'Georgia', 'serif'],
-        mono: ['JetBrains Mono', 'monospace'],
       },
       animation: {
+        'fade-up': 'fadeUp 0.8s ease-out forwards',
+        'fade-in': 'fadeIn 1s ease-out forwards',
+        'slide-right': 'slideRight 0.6s ease-out forwards',
         'float': 'float 6s ease-in-out infinite',
-        'float-slow': 'float 8s ease-in-out infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'spin-slow': 'spin 12s linear infinite',
-        'gradient': 'gradient 8s ease infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
       },
       keyframes: {
+        fadeUp: {
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideRight: {
+          '0%': { opacity: '0', transform: 'translateX(-30px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
+          '50%': { transform: 'translateY(-10px)' },
         },
-        gradient: {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-        },
-        glow: {
-          '0%': { boxShadow: '0 0 20px rgba(0, 245, 255, 0.3)' },
-          '100%': { boxShadow: '0 0 40px rgba(0, 245, 255, 0.6)' },
-        },
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
   },
