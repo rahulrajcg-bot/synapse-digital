@@ -1,7 +1,99 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Globe, Code, Smartphone, Video, FileText, Search, Menu, X, ChevronDown } from 'lucide-react'
+import { Globe, Code, Smartphone, Video, FileText, Search, Menu, X, ChevronDown, MessageCircle, Send } from 'lucide-react'
+
+// Chatbot Component
+function Chatbot() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [messages, setMessages] = useState([
+    { type: 'bot', text: 'Hi! Welcome to Synapse Digital. How can I help you today?' }
+  ])
+  const [input, setInput] = useState('')
+
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!input.trim()) return
+    
+    setMessages([...messages, { type: 'user', text: input }])
+    
+    // Simple bot responses
+    const userMsg = input.toLowerCase()
+    let botResponse = ''
+    
+    if (userMsg.includes('price') || userMsg.includes('cost') || userMsg.includes('₹')) {
+      botResponse = 'Our pricing:\n• Website: ₹15,000 onwards\n• Mobile App: ₹50,000 onwards\n• Video Editing: ₹5,000/project\n• SEO: ₹10,000/month'
+    } else if (userMsg.includes('service') || userMsg.includes('offer')) {
+      botResponse = 'We offer:\n• Website Development\n• Mobile Apps\n• Video Editing\n• PPT Design\n• SEO Services\n• IT Solutions'
+    } else if (userMsg.includes('contact') || userMsg.includes('email') || userMsg.includes('phone')) {
+      botResponse = 'Contact us:\n• Email: rahulraj.cg@gmail.com\n• WhatsApp: +91 8073008938\n• Or fill the contact form below'
+    } else if (userMsg.includes('hello') || userMsg.includes('hi')) {
+      botResponse = 'Hello! 👋 Welcome to Synapse Digital. What can I help you with today?'
+    } else {
+      botResponse = 'Thanks for your message! For detailed inquiries, please fill out our contact form or email us at rahulraj.cg@gmail.com'
+    }
+    
+    setTimeout(() => {
+      setMessages(prev => [...prev, { type: 'bot', text: botResponse }])
+    }, 500)
+    
+    setInput('')
+  }
+
+  return (
+    <div className="fixed bottom-4 right-4 z-50">
+      {!isOpen && (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition hover:scale-110"
+        >
+          <MessageCircle className="w-6 h-6" />
+        </button>
+      )}
+      
+      {isOpen && (
+        <div className="bg-slate-800 rounded-2xl shadow-2xl w-80 h-96 flex flex-col border border-slate-700">
+          <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-t-2xl flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <MessageCircle className="w-5 h-5 text-white" />
+              <span className="text-white font-semibold">Synapse Assistant</span>
+            </div>
+            <button onClick={() => setIsOpen(false)} className="text-white hover:text-gray-200">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          
+          <div className="flex-1 overflow-y-auto p-4 space-y-3">
+            {messages.map((msg, idx) => (
+              <div key={idx} className={`${msg.type === 'user' ? 'text-right' : 'text-left'}`}>
+                <div className={`inline-block p-3 rounded-lg whitespace-pre-line ${
+                  msg.type === 'user' 
+                    ? 'bg-blue-600 text-white' 
+                    : 'bg-slate-700 text-gray-200'
+                }`}>
+                  {msg.text}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <form onSubmit={handleSend} className="p-4 border-t border-slate-700 flex gap-2">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type a message..."
+              className="flex-1 px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
+            />
+            <button type="submit" className="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition">
+              <Send className="w-4 h-4" />
+            </button>
+          </form>
+        </div>
+      )}
+    </div>
+  )
+}
 
 const translations = {
   en: {
@@ -288,6 +380,9 @@ export default function Home() {
           {t.footer}
         </div>
       </footer>
+
+      {/* Chatbot Widget */}
+      <Chatbot />
     </main>
   )
 }
